@@ -1,32 +1,38 @@
 import "./App.css";
+import { ListContacts } from "./ListContacts";
 
-interface Person {
+export interface Contact {
+	id: string;
 	name: string;
+	email: string;
+	avatarURL: string;
 }
 
-interface ContactListProps {
-	contacts: Person[];
-}
-
-export function ContactList({ contacts }: ContactListProps) {
-	return (
-		<ol>
-			{contacts.map((person) => (
-				<li>{person.name}</li>
-			))}
-		</ol>
-	);
-}
+const contacts: Contact[] = [
+	{
+		id: "ryan",
+		name: "Ryan Florence",
+		email: "ryan@reacttraining.com",
+		avatarURL: "http://localhost:5001/ryan.jpg",
+	},
+	{
+		id: "michael",
+		name: "Michael Jackson",
+		email: "michael@reacttraining.com",
+		avatarURL: "http://localhost:5001/michael.jpg",
+	},
+	{
+		id: "tyler",
+		name: "Tyler McGinnis",
+		email: "tyler@reacttraining.com",
+		avatarURL: "http://localhost:5001/tyler.jpg",
+	},
+];
 
 function App() {
 	return (
 		<div className="App">
-			<ContactList
-				contacts={[{ name: "Michael" }, { name: "Ryan" }, { name: "Tyler" }]}
-			/>
-			<ContactList
-				contacts={[{ name: "Amanda" }, { name: "Richard" }, { name: "Geoff" }]}
-			/>
+			<ListContacts contacts={contacts} />
 		</div>
 	);
 }
