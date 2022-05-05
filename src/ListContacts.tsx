@@ -12,9 +12,10 @@ import { Contact } from "./App";
 
 interface ContactListProps {
 	contacts: Contact[];
+	onDeleteContact: (contact: Contact) => any;
 }
 
-export function ListContacts({ contacts }: ContactListProps) {
+export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 	return (
 		<List spacing={3}>
 			{contacts.map((person) => (
@@ -36,6 +37,7 @@ export function ListContacts({ contacts }: ContactListProps) {
 							<p>{person.email}</p>
 						</VStack>
 						<IconButton
+							onClick={() => onDeleteContact(person)}
 							rounded="full"
 							p={1}
 							colorScheme="gray"

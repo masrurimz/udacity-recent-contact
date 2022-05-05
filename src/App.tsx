@@ -32,9 +32,14 @@ const initialContacts: Contact[] = [
 function App() {
 	const [contacts, setContacts] = useState<Contact[]>(initialContacts);
 
+	const removeContact = (contact: Contact) =>
+		setContacts((prevContacts) =>
+			prevContacts.filter((c) => c.id !== contact.id),
+		);
+
 	return (
 		<div>
-			<ListContacts contacts={contacts} />
+			<ListContacts contacts={contacts} onDeleteContact={removeContact} />
 		</div>
 	);
 }
