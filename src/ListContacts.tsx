@@ -1,12 +1,18 @@
 import {
+	Box,
 	HStack,
+	Icon,
 	IconButton,
 	Image,
+	Input,
+	InputGroup,
+	InputLeftElement,
 	List,
 	ListItem,
 	VStack,
 } from "@chakra-ui/react";
-import { MdClose } from "react-icons/md";
+import { useState } from "react";
+import { MdClose, MdSearch } from "react-icons/md";
 
 import { Contact } from "./App";
 
@@ -16,38 +22,60 @@ interface ContactListProps {
 }
 
 export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
+	const [query, setQuery] = useState("");
+
+	const updateQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setQuery(e.target.value.trim());
+	};
+
 	return (
-		<List spacing={3}>
-			{contacts.map((person) => (
-				<ListItem
-					key={person.id}
-					p={5}
-					m={{ base: 0, md: 5 }}
-					borderWidth={{ base: 0, md: 1 }}
-					rounded={{ base: 0, md: "md" }}>
-					<HStack spacing={5}>
-						<Image
-							boxSize={"60px"}
-							src={person.avatarURL}
-							alt={`${person.name} contact avatar`}
-							rounded={"full"}
-						/>
-						<VStack flex={1} alignItems={"flex-start"}>
-							<p>{person.name}</p>
-							<p>{person.email}</p>
-						</VStack>
-						<IconButton
-							onClick={() => onDeleteContact(person)}
-							rounded="full"
-							p={1}
-							colorScheme="gray"
-							aria-label={`Delete contact ${person.name}`}
-							icon={<MdClose />}
-							fontSize={32}
-						/>
-					</HStack>
-				</ListItem>
-			))}
-		</List>
+		<Box>
+			<InputGroup size={"lg"}>
+				<InputLeftElement
+					alignItems={"center"}
+					pointerEvents="none"
+					children={<Icon as={MdSearch} />}
+				/>
+				<Input
+					type={"text"}
+					variant="flushed"
+					placeholder="Search contacts"
+					value={query}
+					onChange={updateQuery}
+				/>
+			</InputGroup>
+			<List spacing={3}>
+				{contacts.map((person) => (
+					<ListItem
+						key={person.id}
+						p={5}
+						m={{ base: 0, md: 5 }}
+						borderWidth={{ base: 0, md: 1 }}
+						rounded={{ base: 0, md: "md" }}>
+						<HStack spacing={5}>
+							<Image
+								boxSize={"60px"}
+								src={person.avatarURL}
+								alt={`${person.name} contact avatar`}
+								rounded={"full"}
+							/>
+							<VStack flex={1} alignItems={"flex-start"}>
+								<p>{person.name}</p>
+								<p>{person.email}</p>
+							</VStack>
+							<IconButton
+								onClick={() => onDeleteContact(person)}
+								rounded="full"
+								p={1}
+								colorScheme="gray"
+								aria-label={`Delete contact ${person.name}`}
+								icon={<MdClose />}
+								fontSize={32}
+							/>
+						</HStack>
+					</ListItem>
+				))}
+			</List>
+		</Box>
 	);
 }
