@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ListContacts } from "./ListContacts";
 
 export interface Contact {
@@ -7,7 +8,7 @@ export interface Contact {
 	avatarURL: string;
 }
 
-const contacts: Contact[] = [
+const initialContacts: Contact[] = [
 	{
 		id: "ryan",
 		name: "Ryan Florence",
@@ -29,6 +30,8 @@ const contacts: Contact[] = [
 ];
 
 function App() {
+	const [contacts, setContacts] = useState<Contact[]>(initialContacts);
+
 	return (
 		<div>
 			<ListContacts contacts={contacts} />
