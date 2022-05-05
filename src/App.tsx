@@ -1,4 +1,3 @@
-import "./App.css";
 import { ListContacts } from "./ListContacts";
 
 export interface Contact {
@@ -31,7 +30,7 @@ const contacts: Contact[] = [
 
 function App() {
 	return (
-		<div className="App">
+		<div>
 			<ListContacts contacts={contacts} />
 		</div>
 	);
