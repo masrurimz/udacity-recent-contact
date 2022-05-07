@@ -1,5 +1,7 @@
 import {
 	Box,
+	Button,
+	Center,
 	HStack,
 	Icon,
 	IconButton,
@@ -28,6 +30,8 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 		setQuery(e.target.value.trim());
 	};
 
+	const clearQuery = () => setQuery("");
+
 	const contactsFiltered = contacts
 		.filter(
 			(c) => c.name.toLowerCase().indexOf(query.trim().toLowerCase()) > -1,
@@ -50,6 +54,19 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 					onChange={updateQuery}
 				/>
 			</InputGroup>
+			{contactsFiltered.length !== contacts.length ? (
+				<Center pt={5}>
+					<HStack spacing={1}>
+						<p>
+							Showing {contactsFiltered.length} of {contacts.length} total
+							contact
+						</p>
+						<Button variant={"link"} onClick={clearQuery}>
+							Show all
+						</Button>
+					</HStack>
+				</Center>
+			) : null}
 			<List spacing={3}>
 				{contactsFiltered.map((person) => (
 					<ListItem
