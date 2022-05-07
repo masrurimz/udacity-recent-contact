@@ -28,6 +28,12 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 		setQuery(e.target.value.trim());
 	};
 
+	const contactsFiltered = contacts
+		.filter(
+			(c) => c.name.toLowerCase().indexOf(query.trim().toLowerCase()) > -1,
+		)
+		.sort((a, b) => a.name.localeCompare(b.name));
+
 	return (
 		<Box>
 			<InputGroup size={"lg"}>
@@ -45,7 +51,7 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 				/>
 			</InputGroup>
 			<List spacing={3}>
-				{contacts.map((person) => (
+				{contactsFiltered.map((person) => (
 					<ListItem
 						key={person.id}
 						p={5}
