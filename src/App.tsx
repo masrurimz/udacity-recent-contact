@@ -1,7 +1,9 @@
+import { Route, Routes } from "react-router-dom";
 import {
 	useGetAllContactsQuery,
 	useRemoveContactMutation,
 } from "./app/services";
+import CreateContact from "./CreateContact";
 import { ListContacts } from "./ListContacts";
 
 export interface Contact {
@@ -18,7 +20,15 @@ function App() {
 
 	return (
 		<div>
-			<ListContacts contacts={contacts} onDeleteContact={removeContact} />
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<ListContacts contacts={contacts} onDeleteContact={removeContact} />
+					}
+				/>
+				<Route path="/create" element={<CreateContact />} />
+			</Routes>
 		</div>
 	);
 }

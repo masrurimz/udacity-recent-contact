@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdClose, MdPersonAdd, MdSearch } from "react-icons/md";
+import { useNavigate, useRoutes } from "react-router-dom";
 
 import { Contact } from "./App";
 
@@ -25,6 +26,8 @@ interface ContactListProps {
 }
 
 export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
+	const navigate = useNavigate();
+
 	const [query, setQuery] = useState("");
 
 	const updateQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +63,7 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 						icon={<MdPersonAdd />}
 						variant="ghost"
 						fontSize={"3xl"}
+						onClick={() => navigate("/create")}
 					/>
 				</InputRightElement>
 			</InputGroup>
