@@ -1,4 +1,7 @@
-import { useGetAllContactsQuery } from "./app/services";
+import {
+	useGetAllContactsQuery,
+	useRemoveContactMutation,
+} from "./app/services";
 import { ListContacts } from "./ListContacts";
 
 export interface Contact {
@@ -11,14 +14,11 @@ export interface Contact {
 function App() {
 	const { data: contacts } = useGetAllContactsQuery();
 
-	// const removeContact = (contact: Contact) =>
-	// 	setContacts((prevContacts) =>
-	// 		prevContacts.filter((c) => c.id !== contact.id),
-	// 	);
+	const [removeContact] = useRemoveContactMutation();
 
 	return (
 		<div>
-			<ListContacts contacts={contacts} onDeleteContact={() => {}} />
+			<ListContacts contacts={contacts} onDeleteContact={removeContact} />
 		</div>
 	);
 }
