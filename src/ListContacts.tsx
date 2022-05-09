@@ -19,7 +19,7 @@ import { MdClose, MdSearch } from "react-icons/md";
 import { Contact } from "./App";
 
 interface ContactListProps {
-	contacts: Contact[];
+	contacts?: Contact[];
 	onDeleteContact: (contact: Contact) => any;
 }
 
@@ -33,7 +33,7 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 	const clearQuery = () => setQuery("");
 
 	const contactsFiltered = contacts
-		.filter(
+		?.filter(
 			(c) => c.name.toLowerCase().indexOf(query.trim().toLowerCase()) > -1,
 		)
 		.sort((a, b) => a.name.localeCompare(b.name));
@@ -54,11 +54,11 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 					onChange={updateQuery}
 				/>
 			</InputGroup>
-			{contactsFiltered.length !== contacts.length ? (
+			{contactsFiltered?.length !== contacts?.length ? (
 				<Center pt={5}>
 					<HStack spacing={1}>
 						<p>
-							Showing {contactsFiltered.length} of {contacts.length} total
+							Showing {contactsFiltered?.length} of {contacts?.length} total
 							contact
 						</p>
 						<Button variant={"link"} onClick={clearQuery}>
@@ -68,7 +68,7 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 				</Center>
 			) : null}
 			<List spacing={3}>
-				{contactsFiltered.map((person) => (
+				{contactsFiltered?.map((person) => (
 					<ListItem
 						key={person.id}
 						p={5}

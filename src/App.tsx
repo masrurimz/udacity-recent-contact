@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useGetAllContactsQuery } from "./app/services";
 import { ListContacts } from "./ListContacts";
 
 export interface Contact {
@@ -8,38 +8,17 @@ export interface Contact {
 	avatarURL: string;
 }
 
-const initialContacts: Contact[] = [
-	{
-		id: "ryan",
-		name: "Ryan Florence",
-		email: "ryan@reacttraining.com",
-		avatarURL: "http://localhost:5001/ryan.jpg",
-	},
-	{
-		id: "michael",
-		name: "Michael Jackson",
-		email: "michael@reacttraining.com",
-		avatarURL: "http://localhost:5001/michael.jpg",
-	},
-	{
-		id: "tyler",
-		name: "Tyler McGinnis",
-		email: "tyler@reacttraining.com",
-		avatarURL: "http://localhost:5001/tyler.jpg",
-	},
-];
-
 function App() {
-	const [contacts, setContacts] = useState<Contact[]>(initialContacts);
+	const { data: contacts } = useGetAllContactsQuery();
 
-	const removeContact = (contact: Contact) =>
-		setContacts((prevContacts) =>
-			prevContacts.filter((c) => c.id !== contact.id),
-		);
+	// const removeContact = (contact: Contact) =>
+	// 	setContacts((prevContacts) =>
+	// 		prevContacts.filter((c) => c.id !== contact.id),
+	// 	);
 
 	return (
 		<div>
-			<ListContacts contacts={contacts} onDeleteContact={removeContact} />
+			<ListContacts contacts={contacts} onDeleteContact={() => {}} />
 		</div>
 	);
 }
