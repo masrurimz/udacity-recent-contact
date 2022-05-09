@@ -9,12 +9,13 @@ import {
 	Input,
 	InputGroup,
 	InputLeftElement,
+	InputRightElement,
 	List,
 	ListItem,
 	VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { MdClose, MdSearch } from "react-icons/md";
+import { MdClose, MdPersonAdd, MdSearch } from "react-icons/md";
 
 import { Contact } from "./App";
 
@@ -53,6 +54,14 @@ export function ListContacts({ contacts, onDeleteContact }: ContactListProps) {
 					value={query}
 					onChange={updateQuery}
 				/>
+				<InputRightElement>
+					<IconButton
+						aria-label="Add Contact"
+						icon={<MdPersonAdd />}
+						variant="ghost"
+						fontSize={"3xl"}
+					/>
+				</InputRightElement>
 			</InputGroup>
 			{contactsFiltered?.length !== contacts?.length ? (
 				<Center pt={5}>
